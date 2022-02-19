@@ -31,25 +31,30 @@ class Tareas {
 
   listadoCompleto() {
     console.log("LISTADO DE TAREAS");
+    this.listadoArr.forEach((tarea, i) => {
+      const idx = `${i + 1}`.green;
+      const { desc, completadoEn } = tarea;
+      const estado = completadoEn ? "Completada".green : "Pendiente".red;
+      console.log(`${idx} ${desc} :: ${estado}`);
+    });
+  }
 
-    for (let i = 0; i < this.listadoArr.length; i++) {
-      console.log(
-        `${`${i + 1}`.green}. ${this.listadoArr[i].desc} :: ${
-          this.listadoArr[i].completadoEn === null
-            ? "Pendiente".red
-            : "Completado".green
-        }`
-      );
-    }
-
-    /*  this.listadoArr.forEach((tarea,i)=>{
-      const idx= `${i+1}`.green;
-      const {desc,completadoEn}=tarea;
-      const {estado=(completadoEn)
-                          ? "Completada".green
-                          : "Pendiente".red}
-      console.log(`${idx} ${desc} :: ${estado}`)
-    }) */
+  listarPendientesCompletadas(completadas = true) {
+    this.listadoArr.forEach((tarea, i) => {
+      const idx = `${i + 1}`.green;
+      const { desc, completadoEn } = tarea;
+      const estado = completadoEn ? "Completada".green : "Pendiente".red;
+      let contador = 0;
+      if (completadas) {
+        if (completadoEn) {
+          console.log(`${(contador + ".").green} ${desc} :: ${completadoEn}`);
+        }
+      } else {
+        if (!completadoEn) {
+          console.log(`${(idx + ".").green} ${desc} :: ${estado}`);
+        }
+      }
+    });
   }
 }
 
